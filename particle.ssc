@@ -1,0 +1,42 @@
+component particle
+    inputs
+        fx = {0, 'N'};
+        fy = {0, 'N'};
+        Mz = {0, 'N*m'};
+    end
+    
+    outputs
+        pos = {[0 0], 'm'};
+        angle = {[0], 'rad'};
+    end
+    
+    parameters
+        mass = {1, 'kg'};
+        Iz = {1, 'kg*m^2'};
+    end
+    
+    variables
+        x = {0, 'm'};
+        dx = {0, 'm/s'};
+        
+        y = {0, 'm'};
+        dy = {0, 'm/s'};
+        
+        theta = {0, 'rad'};
+        dtheta = {0, 'rad/s'};
+        
+    end
+    
+    equations
+        x.der == dx;
+        y.der == dy;
+        theta.der == dtheta;
+        
+        dx.der * mass == fx*cos(theta) - fy*sin(theta);
+        dy.der * mass == fx*sin(theta) + fy*cos(theta);
+        Iz * dtheta.der == Mz;
+        
+        pos == [x y];
+        angle == theta;
+    end
+end
