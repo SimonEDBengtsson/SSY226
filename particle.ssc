@@ -7,7 +7,9 @@ component particle
     
     outputs
         pos = {[0 0], 'm'};
-        angle = {[0], 'rad'};
+        velocity = {[0 0], 'm/s'};
+        angle = {0, 'rad'};
+        angular_vel = {0, 'rad/s'};
     end
     
     parameters
@@ -37,6 +39,8 @@ component particle
         Iz * dtheta.der == Mz;
         
         pos == [x y];
+        velocity == [dx dy];
         angle == theta;
+        angular_vel == dtheta;
     end
 end
