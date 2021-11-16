@@ -33,27 +33,32 @@ mpc_controller.ControlHorizon = 5;
 mpc_controller.PredictionHorizon = 20;
 
 mpc_controller
+%open('particle_model.slx');
 
 %% Animation
 
-y = out.yout.get(1);
-y = y.Values.Data;
+y_actual = out.yout{1}.Values.Data;
+y_reference = out.yout{2}.Values.Data;
 t = out.tout;
 size = [1 1];
 clear frames;
 
-plot(1); clf; grid on; hold on; axis equal;
-rect = rectangle('position', [-size/2 size], 'curvature', [1 1]);
-arrow = quiver(0, 0, 1*sin(0), 1*cos(0), 'linewidth', 3);
-axis([-3 3 -2 12]);
+plot(1); clf; grid on; hold on; axis equal; axis([-3 3 -2 12]);
+
+circ_actual = rectangle('position', [-size/2 size], 'curvature', [1 1], 'linewidth', 3);
+arrow_actual = quiver(0, 0, 1*sin(0), 1*cos(0), 'linewidth', 3);
+circ_reference = rectangle('position', [-size/2 size], 'curvature', [1 1], 'edgecolor', 'g');
+arrow_reference = quiver(0, 0, 1*sin(0), 1*cos(0), 'linewidth', 2);
 
 for x = 1:length(t)
     frames(x) = getframe;
-    rect.Position = [y(x,1)-size(1)/2, y(x,2)-size(2)/2, size];
-    arrow.XData = y(x,1);
-    arrow.YData = y(x,2);
-    arrow.UData = sin(y(x,3));
-    arrow.VData = cos(y(x,3));
+    circ_actual.Position = [y_actual(x,1)-size(1)/2, y_actual(x,2)-size(2)/2, size];
+    arrow_actual.XData = y_actual(x,1); arrow_actual.YData = y_actual(x,2);
+    arrow_actual.UData = sin(y_actual(x,3)); arrow_actual.VData = cos(y_actual(x,3));
+    
+    circ_reference.Position = [y_reference(x,1)-size(1)/2, y_reference(x,2)-size(2)/2, size];
+    arrow_reference.XData = y_reference(x,1); arrow_reference.YData = y_reference(x,2);
+    arrow_reference.UData = sin(y_reference(x,3)); arrow_reference.VData = cos(y_reference(x,3));
 end
 %%
 
