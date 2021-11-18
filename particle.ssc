@@ -10,6 +10,9 @@ component particle
         velocity = {[0 0], 'm/s'};
         angle = {0, 'rad'};
         angular_vel = {0, 'rad/s'};
+        
+        velocity_VF={[0 0], 'm/s'};
+
     end
     
     parameters
@@ -42,5 +45,8 @@ component particle
         velocity == [dx dy];
         angle == theta;
         angular_vel == dtheta;
+
+        velocity_VF(1) == velocity(1)*cos(theta)+velocity(2)*sin(theta);
+        velocity_VF(2) == -velocity(1)*sin(theta)+velocity(2)*cos(theta);
     end
 end
