@@ -1,7 +1,7 @@
 clc;
-ts = 0.05; %s
-m = 1; %kg
-Iz = 1; %kg*m^2
+ts = 0.5; %s
+m = mass; %kg
+Iz = I(end); %kg*m^2
 x0 = [0 0 0 0 0 0];
 
 A_c = [0 0 0 1 0 0;
@@ -27,8 +27,8 @@ sys_d = c2d(sys, ts);
 mpc_controller = mpc(sys_d);
 
 mpc_controller.Weights.OutputVariables = [10 10 10];
-mpc_controller.Weights.ManipulatedVariables = [1 1 1];
-mpc_controller.Weights.ManipulatedVariablesRate = [1 1 1];
+mpc_controller.Weights.ManipulatedVariables = [(radius/100)^2 (radius/100)^2 (radius/100)^2];
+mpc_controller.Weights.ManipulatedVariablesRate = [1 1 1]*0.1;
 mpc_controller.ControlHorizon = 3;
 mpc_controller.PredictionHorizon = 10;
 

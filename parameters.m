@@ -24,7 +24,7 @@ B_r=B(iOutputForces,iInputForces);
 % Force allocation matrix
 A=zeros(size(B'));
 A(iInputForces,iOutputForces)=pinv(B_r);
-
+radius=0.4;
 mass=2000;
 I=4000*eye(3);
 mu=1;
