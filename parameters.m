@@ -19,8 +19,7 @@ B=[repmat(eye(3),[1 4])
 % Forces in x and y, as well as yawing torque
 iOutputForces=[1 2 6];
 % x and y on front wheels, only x on back wheels
-iInputForces=[1 2 4 5 7 10];
-%iInputForces=[1 4 7 10];
+iInputForces=[1 2 4 5 7 8 10 11];
 B_r=B(iOutputForces,iInputForces);
 % Force allocation matrix
 A=zeros(size(B'));
@@ -33,9 +32,11 @@ I=4000*eye(3);
 mu=1;
 turn_limit=deg2rad(30);
 v_0=10;
+epsilon=0.1;
 
 % MPC
-T=0.1; N=10;
+T=0.1;
+N=10;
 Qx=eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
 Qu(end)=1e-6;
 Ac=[zeros(3) eye(3)
@@ -45,12 +46,12 @@ Bc=[zeros(3)
 sysc=ss(Ac,Bc,[],[]);
 sysd=c2d(sysc,T);
 Ad=sysd.A; Bd=sysd.B;
-tau=0:T:10000;
+tau=0:T:1000;
 r=@(t)[1000*cos(t/100-pi/2)
        1000*(sin(t/100-pi/2)+1)
        t/100
-      -10*sin(t-pi/2)
-       10*cos(t-pi/2)
+      -10*sin(t/100-pi/2)
+       10*cos(t/100-pi/2)
        1/100];
 R=cell2mat(arrayfun(r,tau,'UniformOutput',false));
 %% Wheel direction controller H_inf
