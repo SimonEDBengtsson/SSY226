@@ -32,11 +32,12 @@ I=4000*eye(3);
 mu=1;
 turn_limit=deg2rad(30);
 v_0=10;
-epsilon=0.1;
+Q_ae=eye(3);
+Q_tau=eye(4);
 
 % MPC
 T=0.1;
-N=10;
+N=100;
 Qx=eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
 Qu(end)=1e-6;
 Ac=[zeros(3) eye(3)
