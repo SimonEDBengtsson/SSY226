@@ -1,3 +1,4 @@
+clc; clear;
 front_length=1.4;
 rear_length=1.6;
 width=2;
@@ -47,14 +48,15 @@ Bc=[zeros(3)
 sysc=ss(Ac,Bc,[],[]);
 sysd=c2d(sysc,T);
 Ad=sysd.A; Bd=sysd.B;
-tau=0:T:1000;
-r=@(t)[1000*cos(t/100-pi/2)
-       1000*(sin(t/100-pi/2)+1)
-       t/100
-      -10*sin(t/100-pi/2)
-       10*cos(t/100-pi/2)
-       1/100];
-R=cell2mat(arrayfun(r,tau,'UniformOutput',false));
+reference_generator;
+% tau=0:T:1000;
+% r=@(t)[1000*cos(t/100-pi/2)
+%       -1000*(sin(t/100-pi/2)+1)
+%       -t/100
+%       -10*sin(t/100-pi/2)
+%       -10*cos(t/100-pi/2)
+%       -1/100];
+% R=cell2mat(arrayfun(r,tau,'UniformOutput',false));
 %% Wheel direction controller H_inf
 tau=1;
 G=1/tf('s');% Internal plant model
