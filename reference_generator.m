@@ -9,7 +9,6 @@ r_0=[0
  l_initial=400;
  nTurns=6;
  l_end=50;
- v_norm=@(t)10;
  
  l=l_initial+nTurns*deg2rad(turn_angle)*turn_radius+l_end;
  super_sample_ratio=100;
