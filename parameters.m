@@ -32,22 +32,22 @@ mass=2000;
 I=4000*eye(3);
 mu=1;
 turn_limit=deg2rad(30);
-v_0=100;
-v_norm=@(t)10;
+v_0=20;
+v_norm=@(t)v_0;
 Q_ae=eye(3);
 Q_tau=eye(4);
 
 % MPC
-T=0.1;
-N=100;
-Qx=1e3*eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
+T_c=0.1; % Controller period
+T_d=0.1; N=100; % Controller discretization and horizon
+Qx=1e3*eye(6); Qu=1e-6*eye(3); Qf=1e3*eye(6);
 Qu(end)=1e-6;
 Ac=[zeros(3) eye(3)
     zeros(3) zeros(3)];
 Bc=[zeros(3)
     diag(1./[mass mass I(end)])];
 sysc=ss(Ac,Bc,[],[]);
-sysd=c2d(sysc,T);
+sysd=c2d(sysc,T_d);
 Ad=sysd.A; Bd=sysd.B;
 reference_generator;
 % tau=0:T:1000;
