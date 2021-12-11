@@ -40,8 +40,8 @@ Q_tau=eye(4);
 % MPC
 T_c=0.1; % Controller period
 T_d=0.1; N=100; % Controller discretization and horizon
-Qx=1e3*eye(6); Qu=1e-6*eye(3); Qf=1e3*eye(6);
-Qu(end)=1e-6;
+Qx=1e3*eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
+Qu(end)=1e-3;
 Ac=[zeros(3) eye(3)
     zeros(3) zeros(3)];
 Bc=[zeros(3)
@@ -58,6 +58,7 @@ reference_generator;
 %       -10*cos(t/100-pi/2)
 %       -1/100];
 % R=cell2mat(arrayfun(r,tau,'UniformOutput',false));
+
 %% Wheel direction controller H_inf
 tau=1;
 G=1/tf('s');% Internal plant model

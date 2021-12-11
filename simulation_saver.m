@@ -7,9 +7,9 @@ wheel_torques=out.wheel_torques.Data;
 wheel_omega=out.wheel_omega.Data;
 model_forces=out.model_forces.Data;
 save('chicane_20.mat','time','states','force_request','reference','wheel_angles','wheel_torques','wheel_omega','model_forces');
-close all
-% plot(states(:,1),states(:,2))
-% axis equal
+%close all
+%plot(states(:,1),states(:,2))
+%axis equal
 % hold on
 % plot(reference(:,1),reference(:,2))
-plot(time,vecnorm((reference-states)'))
+%plot(time,vecnorm((reference-states)'))
