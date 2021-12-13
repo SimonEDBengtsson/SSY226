@@ -1,4 +1,4 @@
-mu_set = [0.8, 0.4];
+mu_set = [0.8, 0.50];
 n = length(mu_set);
 close all;
 
