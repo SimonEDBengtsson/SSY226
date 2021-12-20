@@ -9,8 +9,9 @@ radius=0.4;
 mass=2000;
 I=4000*eye(3);
 mu=0.6;
+mu_hat=0.5;
 turn_limit=deg2rad(30);
-v_0=20;
+v_0=10;
 v_norm=@(t)v_0;
 Q_ae=eye(3);
 Q_tau=eye(4);
@@ -19,7 +20,7 @@ steerable=[1 1 0 0];
 
 % MPC
 T_c=0.1; % Controller period
-T_d=0.1; N=100; % Controller discretization and horizon
+T_d=1; N=10; % Controller discretization and horizon
 Qx=1e3*eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
 Qu(end)=1e-3;
 Ac=[zeros(3) eye(3)
