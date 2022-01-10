@@ -15,13 +15,18 @@ v_norm=@(t)v_0;
 Q_ae=eye(3);
 Q_tau=eye(4);
 torque_distribution=[1 1 0 0];
-steerable=[1 1 0 0];
+steerable=[1 1 1 1];
 
 % MPC
 T_c=0.1; % Controller period
-T_d=0.1; N=100; % Controller discretization and horizon
-Qx=1e3*eye(6); Qu=1e-3*eye(3); Qf=1e3*eye(6);
-Qu(end)=1e-3;
+T_d=1; N=10; % Controller discretization and horizon
+Qx=1e3*eye(6);
+%pos_cost = 1e3;
+%vel_cost = 0;
+%Qx = blkdiag(pos_cost, pos_cost, pos_cost, vel_cost, vel_cost, pos_cost);
+Qu=1e-3*eye(3); 
+Qf=Qx;
+%Qu(end)=1e-6;
 Ac=[zeros(3) eye(3)
     zeros(3) zeros(3)];
 Bc=[zeros(3)
